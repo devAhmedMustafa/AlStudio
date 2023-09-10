@@ -1,0 +1,5 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "appService.defaultWebAppToDeploy": "/subscriptions/be99ea43-8234-4a7c-94fe-b2a9e7241bcf/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/AlStudioDesigns",
+    "appService.deploySubpath": "."
+}
