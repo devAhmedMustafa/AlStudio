@@ -1,3 +1,5 @@
+from io import BytesIO
+from django.core.files import File
 from django.db import models
 from datetime import datetime
 from uuid import uuid4
@@ -18,15 +20,17 @@ class Design(models.Model):
     publish_date = models.DateTimeField(default=datetime.now())
     album = models.ManyToManyField(Album, blank=True)
 
+    def compress(self, image):    
+        im = Image.open(image)   
+        im_io = BytesIO()     
+        im.save(im_io, 'JPEG', quality=30)    
+        new_image = File(im_io, name=image.name)  
+        return new_image
+
     def save(self, *args, **kwargs):
+        compImg = self.compress(self.img)
+        self.img = compImg
         super().save(*args, **kwargs)
-        img = Image.open(self.img.path)
-        if img.height > 900:
-            output_size = (img.width,900)
-        if img.width > 900:
-            output_size = (300,img.height)
-            img.thumbnail(output_size)
-            img.save(self.img)
 
     def __str__(self):
         return f"{self.title}"
