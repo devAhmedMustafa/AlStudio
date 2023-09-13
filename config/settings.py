@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-import dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,6 +79,9 @@ DATABASES = {
     }
 }
 
+DATABASES["default"] = dj_database_url.parse("postgres://alstudio_user:4PU9NbiIA1XQxykx4rfHEeVMwkqZsQSh@dpg-ck125rfhdsdc73e234bg-a.oregon-postgres.render.com/alstudio") # type: ignore
+
+# postgres://alstudio_user:4PU9NbiIA1XQxykx4rfHEeVMwkqZsQSh@dpg-ck125rfhdsdc73e234bg-a.oregon-postgres.render.com/alstudio
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
